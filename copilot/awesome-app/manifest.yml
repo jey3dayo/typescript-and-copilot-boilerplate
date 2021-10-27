@@ -1,0 +1,28 @@
+name: awesome-app
+type: Scheduled Job
+
+on:
+  schedule: "10 14 * * *"
+retries: 3
+#timeout: 1h30m
+
+image:
+  build: Dockerfile
+
+cpu: 256
+memory: 512
+
+variables:
+  NODE_ENV: development
+
+environments:
+  production:
+    variables:
+      NODE_ENV: production
+    secrets:
+      SLACK_WEBHOOK_URL: /copilot/awesome-app/production/secrets/SLACK_WEBHOOK_URL
+  staging:
+    variables:
+      NODE_ENV: staging
+    secrets:
+      SLACK_WEBHOOK_URL: /copilot/awesome-app/staging/secrets/SLACK_WEBHOOK_URL

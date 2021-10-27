@@ -1,0 +1,14 @@
+version: '3.4'
+volumes:
+  node_modules-store:
+services:
+  batch:
+    build: .
+    env_file: ./.env
+    volumes:
+      - node_modules-store:/app/node_modules:delegated
+    networks:
+      - back-tier
+networks:
+  back-tier:
+    driver: bridge
